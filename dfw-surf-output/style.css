@@ -1,0 +1,145 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: #fff;
+}
+
+/* ── Hero split layout ── */
+.hero {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Left content panel ── */
+.hero__content {
+  flex: 0 0 50%;
+  background: #ffffff;
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero__brand {
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 900;
+  color: #1a5fa8;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.hero__desc {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333333;
+  max-width: 440px;
+  margin-bottom: 44px;
+}
+
+.hero__desc strong {
+  font-weight: 700;
+  color: #111;
+}
+
+/* ── Activities grid ── */
+.activities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 24px;
+  column-gap: 32px;
+  max-width: 420px;
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.activity__icon {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  color: #1a5fa8;
+}
+
+.activity__label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1a5fa8;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* ── Right photo panel ── */
+.hero__photo {
+  flex: 0 0 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Fade from white on the left edge of the photo */
+.hero__photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.1) 25%, transparent 55%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Placeholder shown until real photo is added */
+.hero__photo-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  background: linear-gradient(160deg, #87ceeb 0%, #4a9fd4 40%, #2d6a9f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__photo-placeholder span {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero { flex-direction: column; }
+
+  .hero__content {
+    flex: none;
+    padding: 52px 32px 44px;
+  }
+
+  .hero__photo {
+    flex: none;
+    min-height: 56vw;
+  }
+
+  .hero__photo-placeholder {
+    min-height: 56vw;
+  }
+
+  .hero__brand { font-size: clamp(40px, 8vw, 64px); }
+}
+
+@media (max-width: 540px) {
+  .hero__content { padding: 40px 20px 36px; }
+  .activities { column-gap: 20px; row-gap: 18px; }
+  .hero__brand { font-size: 40px; }
+  .hero__desc { font-size: 15px; }
+}
