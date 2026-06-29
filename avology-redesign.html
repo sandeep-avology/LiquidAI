@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avology Technologies™ — Enterprise Digital Solutions</title>
+  <meta name="description" content="Avology Technologies builds enterprise-grade software, mobile apps, web platforms, and blockchain solutions that transform businesses globally. Since 2012." />
+  <meta name="keywords" content="software development, mobile app development, web development, blockchain, UI/UX design, digital marketing" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── TOKENS ─── */
+    :root {
+      --bg:       #07070E;
+      --bg-1:     #0C0C18;
+      --bg-2:     #101020;
+      --bg-3:     #141430;
+      --border:        rgba(255,255,255,0.055);
+      --border-mid:    rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.16);
+      --text:   #EDEDF2;
+      --text-2: #9090A8;
+      --text-3: #505068;
+      --violet: #7C3AED;
+      --indigo: #6366F1;
+      --lavender: #A78BFA;
+      --glow:   rgba(124,58,237,0.28);
+      --green:  #10B981;
+      --r:  10px;
+      --rl: 18px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 104px 0; }
+
+    /* ─── FADE-UP ─── */
+    .fu {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fu.in { opacity: 1; transform: translateY(0); }
+    .fu.d1 { transition-delay: .08s; }
+    .fu.d2 { transition-delay: .16s; }
+    .fu.d3 { transition-delay: .24s; }
+    .fu.d4 { transition-delay: .32s; }
+    .fu.d5 { transition-delay: .40s; }
+
+    /* ─── PILL LABEL ─── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      background: rgba(124,58,237,.09);
+      border: 1px solid rgba(124,58,237,.22);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 22px;
+    }
+    .pill::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--lavender);
+      flex-shrink: 0;
+    }
+
+    /* ─── HEADINGS ─── */
+    .h1 {
+      font-size: clamp(42px, 6vw, 84px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      color: var(--text);
+    }
+    .h2 {
+      font-size: clamp(30px, 3.8vw, 50px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+    .grad {
+      background: linear-gradient(135deg, var(--lavender) 0%, #818CF8 50%, var(--indigo) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sub {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity .15s, transform .15s, box-shadow .15s, background .15s, border-color .15s;
+      white-space: nowrap;
+      letter-spacing: -.01em;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      color: #fff;
+    }
+    .btn-primary:hover {
+      opacity: .88;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px var(--glow);
+    }
+    .btn-primary:active { transform: translateY(0); opacity: 1; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.25);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-2);
+      border: 1px solid var(--border-mid);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+    }
+
+    .btn-lg { padding: 14px 28px; font-size: 15px; border-radius: 11px; }
+
+    /* ─────────────────────────────────────────
+       NAVIGATION
+    ───────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(7,7,14,.75);
+      backdrop-filter: blur(22px) saturate(1.6);
+      -webkit-backdrop-filter: blur(22px) saturate(1.6);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 33px; height: 33px;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.025em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex: 1;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-mid);
+      color: var(--text-2);
+      border-radius: 7px;
+      padding: 6px 8px;
+      cursor: pointer;
+      transition: color .15s, border-color .15s;
+    }
+    .hamburger:hover { color: var(--text); border-color: var(--border-strong); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 62px; left: 0; right: 0;
+      background: var(--bg-1);
+      border-bottom: 1px solid var(--border);
+      padding: 22px 24px 26px;
+      z-index: 199;
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-bottom: 20px; }
+    .mobile-nav a { font-size: 15px; color: var(--text-2); text-decoration: none; font-weight: 500; }
+    .mobile-nav a:hover { color: var(--text); }
+    .mobile-nav .btn { width: 100%; justify-content: center; }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 130px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle dot grid */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(ellipse 75% 65% at 50% 0%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 0%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* top violet glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -300px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 700px;
+      background: radial-gradient(ellipse, rgba(124,58,237,.22) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-body {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border-mid);
+      border-radius: 100px;
+      padding: 6px 16px 6px 10px;
+      margin-bottom: 36px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(16,185,129,.6);
+      flex-shrink: 0;
+    }
+
+    .hero-title { margin-bottom: 28px; }
+
+    .hero-sub {
+      max-width: 580px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-divider {
+      margin-top: 80px;
+      padding-top: 52px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+
+    .hs-num {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      line-height: 1;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .hs-label {
+      font-size: 12.5px;
+      color: var(--text-3);
+      font-weight: 500;
+    }
+
+    /* ─────────────────────────────────────────
+       TRUSTED BY
+    ───────────────────────────────────────── */
+    .trusted {
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .trusted-label {
+      text-align: center;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 36px;
+    }
+
+    .marquee-wrap {
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    }
+
+    .marquee {
+      display: flex;
+      gap: 56px;
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .logo-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: #fff;
+      opacity: .28;
+      min-width: 100px;
+      white-space: nowrap;
+    }
+
+    /* ─────────────────────────────────────────
+       SERVICES
+    ───────────────────────────────────────── */
+    .svc-header { margin-bottom: 60px; }
+
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      overflow: hidden;
+    }
+
+    .svc-card {
+      background: var(--bg);
+      padding: 36px 32px;
+      transition: background .2s;
+    }
+    .svc-card:hover { background: var(--bg-2); }
+
+    .svc-icon {
+      width: 46px; height: 46px;
+      border-radius: 11px;
+      background: rgba(124,58,237,.1);
+      border: 1px solid rgba(124,58,237,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .svc-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .svc-desc {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.72;
+    }
+
+    .svc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--lavender);
+      margin-top: 20px;
+      text-decoration: none;
+      transition: gap .15s, opacity .15s;
+    }
+    .svc-link:hover { gap: 9px; opacity: .8; }
+
+    /* ─────────────────────────────────────────
+       WHY CHOOSE US
+    ───────────────────────────────────────── */
+    .why-section {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-features { display: flex; flex-direction: column; gap: 30px; margin-top: 36px; }
+
+    .wf-item { display: flex; gap: 16px; align-items: flex-start; }
+
+    .wf-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(124,58,237,.09);
+      border: 1px solid rgba(124,58,237,.16);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+
+    .wf-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+      letter-spacing: -.01em;
+    }
+
+    .wf-desc { font-size: 13.5px; color: var(--text-2); line-height: 1.68; }
+
+    .stat-quad {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .sq-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 26px 22px;
+      transition: border-color .2s;
+    }
+    .sq-card:hover { border-color: var(--border-mid); }
+
+    .sq-num {
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      line-height: 1;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, var(--lavender), #818CF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .sq-label { font-size: 13px; color: var(--text-2); font-weight: 500; }
+
+    /* ─────────────────────────────────────────
+       PROCESS
+    ───────────────────────────────────────── */
+    .process-head { text-align: center; margin-bottom: 0; }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 64px;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 27px;
+      left: calc(10% + 28px);
+      right: calc(10% + 28px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-mid) 20%, var(--border-mid) 80%, transparent);
+    }
+
+    .ps-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 12px;
+    }
+
+    .ps-num {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: var(--bg-1);
+      border: 1px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--lavender);
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .ps-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -.01em;
+    }
+
+    .ps-desc { font-size: 12.5px; color: var(--text-3); line-height: 1.6; }
+
+    /* ─────────────────────────────────────────
+       CASE STUDIES
+    ───────────────────────────────────────── */
+    .work-section {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .work-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .case-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: border-color .2s, transform .2s;
+      cursor: pointer;
+    }
+    .case-card:hover {
+      border-color: var(--border-mid);
+      transform: translateY(-2px);
+    }
+
+    .case-tag {
+      display: inline-flex;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      background: rgba(124,58,237,.09);
+      border: 1px solid rgba(124,58,237,.16);
+      border-radius: 6px;
+      padding: 3px 10px;
+      margin-bottom: 18px;
+      width: fit-content;
+    }
+
+    .case-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -.025em;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .case-desc {
+      font-size: 13.5px;
+      color: var(--text-2);
+      line-height: 1.72;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+
+    .case-metrics {
+      display: flex;
+      gap: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cm-num {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--text);
+    }
+
+    .cm-label {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* ─────────────────────────────────────────
+       TESTIMONIALS
+    ───────────────────────────────────────── */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 60px;
+    }
+
+    .testi-card {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: border-color .2s;
+    }
+    .testi-card:hover { border-color: var(--border-mid); }
+
+    .t-stars { color: #F59E0B; font-size: 13px; letter-spacing: 2px; }
+
+    .t-text {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.78;
+      font-style: italic;
+      flex: 1;
+    }
+
+    .t-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .t-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(124,58,237,.5), rgba(99,102,241,.4));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+
+    .t-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
+    .t-role { font-size: 12px; color: var(--text-3); margin-top: 1px; }
+
+    /* ─────────────────────────────────────────
+       TECH STACK
+    ───────────────────────────────────────── */
+    .tech-section {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+      margin-top: 56px;
+    }
+
+    .tech-item {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 14px;
+      text-align: center;
+      transition: border-color .2s, background .2s;
+    }
+    .tech-item:hover {
+      border-color: var(--border-mid);
+      background: var(--bg-3);
+    }
+
+    .ti-icon { font-size: 26px; display: block; margin-bottom: 9px; }
+    .ti-name { font-size: 12px; font-weight: 600; color: var(--text-2); }
+
+    /* ─────────────────────────────────────────
+       FAQ
+    ───────────────────────────────────────── */
+    .faq-list {
+      max-width: 760px;
+      margin: 56px auto 0;
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      overflow: hidden;
+    }
+
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 26px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 15.5px;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: background .15s;
+      letter-spacing: -.01em;
+    }
+    .faq-q:hover { background: rgba(255,255,255,.02); }
+
+    .faq-ic {
+      width: 24px; height: 24px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: var(--bg-2);
+      border: 1px solid var(--border-mid);
+      color: var(--text-2);
+      font-size: 18px;
+      line-height: 1;
+      transition: transform .22s, background .2s, border-color .2s, color .2s;
+    }
+    .faq-item.open .faq-ic {
+      transform: rotate(45deg);
+      background: rgba(124,58,237,.1);
+      border-color: rgba(124,58,237,.25);
+      color: var(--lavender);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .faq-item.open .faq-a { max-height: 280px; }
+
+    .faq-a-in {
+      padding: 0 26px 22px;
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.78;
+    }
+
+    /* ─────────────────────────────────────────
+       CTA SECTION
+    ───────────────────────────────────────── */
+    .cta-section {
+      padding: 120px 0;
+      text-align: center;
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 680px; height: 480px;
+      background: radial-gradient(ellipse, rgba(124,58,237,.18) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .cta-body { position: relative; z-index: 1; }
+
+    .cta-title {
+      font-size: clamp(34px, 4.8vw, 60px);
+      font-weight: 900;
+      letter-spacing: -.04em;
+      line-height: 1.06;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    .cta-sub {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    .cta-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .cta-perks {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 44px;
+      flex-wrap: wrap;
+    }
+
+    .cta-perk {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13.5px;
+      color: var(--text-3);
+    }
+
+    .perk-check {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: rgba(16,185,129,.12);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      padding: 64px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand p {
+      font-size: 13.5px;
+      color: var(--text-2);
+      line-height: 1.75;
+      margin-top: 14px;
+      max-width: 270px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .social-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color .15s, border-color .15s, background .15s;
+    }
+    .social-icon:hover { color: var(--text); background: rgba(255,255,255,.07); border-color: var(--border-strong); }
+
+    .fc-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 20px;
+    }
+
+    .fc-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .fc-links a {
+      font-size: 13.5px;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .fc-links a:hover { color: var(--text); }
+    .fc-address { font-size: 13.5px; color: var(--text-2); line-height: 1.7; }
+
+    .footer-bottom {
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p { font-size: 13px; color: var(--text-3); }
+
+    .fb-links { display: flex; gap: 22px; list-style: none; }
+    .fb-links a { font-size: 13px; color: var(--text-3); text-decoration: none; transition: color .15s; }
+    .fb-links a:hover { color: var(--text-2); }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      .case-grid { grid-template-columns: repeat(2, 1fr); }
+      .testi-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: repeat(4, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .why-grid { grid-template-columns: 1fr; gap: 52px; }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .process-steps::before { display: none; }
+      .ps-item {
+        flex-direction: row;
+        text-align: left;
+        gap: 18px;
+      }
+      .ps-num { margin-bottom: 0; flex-shrink: 0; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 76px 0; }
+      .hero { padding: 116px 0 72px; }
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .stat-quad { grid-template-columns: 1fr 1fr; }
+      .hero-divider { gap: 36px; }
+      .work-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 520px) {
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { justify-content: center; }
+      .hero-divider { flex-direction: column; gap: 28px; }
+      .stat-quad { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════════════════════ NAV ════════════════════ -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg width="17" height="17" fill="none" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="logo-text">Avology Technologies™</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#work">Case Studies</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="mailto:contact@avologypro.com" class="btn btn-ghost">Contact</a>
+        <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+      </div>
+
+      <button class="hamburger" id="hbg" aria-label="Open menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#services" onclick="closeNav()">Services</a></li>
+      <li><a href="#why-us"   onclick="closeNav()">Why Us</a></li>
+      <li><a href="#work"     onclick="closeNav()">Case Studies</a></li>
+      <li><a href="#testimonials" onclick="closeNav()">Testimonials</a></li>
+      <li><a href="#faq"      onclick="closeNav()">FAQ</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary btn-lg" onclick="closeNav()">Get a Free Quote</a>
+  </div>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <div class="hero">
+    <div class="hero-body">
+      <div class="hero-badge fu">
+        <span class="badge-dot"></span>
+        Trusted by 16,000+ projects worldwide
+      </div>
+
+      <h1 class="h1 hero-title fu d1">
+        Enterprise Software<br>
+        <span class="grad">Built to Scale</span>
+      </h1>
+
+      <p class="sub hero-sub fu d2">
+        Avology Technologies transforms ambitious ideas into world-class digital products. From mobile apps to blockchain platforms — we engineer solutions that drive real business outcomes.
+      </p>
+
+      <div class="hero-ctas fu d3">
+        <a href="#contact" class="btn btn-primary btn-lg">
+          Start Your Project
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#work" class="btn btn-outline btn-lg">View Our Work</a>
+      </div>
+
+      <div class="hero-divider fu d4">
+        <div style="text-align:center">
+          <div class="hs-num" data-target="1.8" data-suffix="M+">1.8M+</div>
+          <div class="hs-label">Active live projects</div>
+        </div>
+        <div style="text-align:center">
+          <div class="hs-num" data-target="16" data-suffix="K+">16K+</div>
+          <div class="hs-label">Completed projects</div>
+        </div>
+        <div style="text-align:center">
+          <div class="hs-num">12+</div>
+          <div class="hs-label">Years of expertise</div>
+        </div>
+        <div style="text-align:center">
+          <div class="hs-num">98%</div>
+          <div class="hs-label">Client satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TRUSTED BY ════════════════════ -->
+  <div class="trusted">
+    <p class="trusted-label">Trusted by companies worldwide</p>
+    <div class="marquee-wrap">
+      <div class="marquee">
+        <span class="logo-chip">Shopify</span>
+        <span class="logo-chip">TechCorp</span>
+        <span class="logo-chip">NovaSoft</span>
+        <span class="logo-chip">FinScale</span>
+        <span class="logo-chip">DataBridge</span>
+        <span class="logo-chip">CloudX</span>
+        <span class="logo-chip">PlatformIO</span>
+        <span class="logo-chip">MediSync</span>
+        <span class="logo-chip">Nexatech</span>
+        <span class="logo-chip">Shopify</span>
+        <span class="logo-chip">TechCorp</span>
+        <span class="logo-chip">NovaSoft</span>
+        <span class="logo-chip">FinScale</span>
+        <span class="logo-chip">DataBridge</span>
+        <span class="logo-chip">CloudX</span>
+        <span class="logo-chip">PlatformIO</span>
+        <span class="logo-chip">MediSync</span>
+        <span class="logo-chip">Nexatech</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ SERVICES ════════════════════ -->
+  <section id="services">
+    <div class="container">
+      <div class="svc-header">
+        <div class="pill fu">What We Build</div>
+        <h2 class="h2 fu d1" style="margin-bottom:14px">Full-Stack Digital<br>Solutions</h2>
+        <p class="sub fu d2" style="max-width:520px">From concept to deployment, we deliver enterprise-grade products across every major technology domain.</p>
+      </div>
+
+      <div class="svc-grid">
+        <div class="svc-card fu">
+          <div class="svc-icon">⚙️</div>
+          <h3 class="svc-title">Software Development</h3>
+          <p class="svc-desc">Custom enterprise software engineered for performance, security, and scalability. We architect solutions that grow with your business and outlast technology trends.</p>
+          <a href="#contact" class="svc-link">Learn more <span>→</span></a>
+        </div>
+        <div class="svc-card fu d1">
+          <div class="svc-icon">📱</div>
+          <h3 class="svc-title">Mobile App Development</h3>
+          <p class="svc-desc">Native iOS and Android applications with exceptional UX. We build apps users love — fast, reliable, and purpose-built for your audience.</p>
+          <a href="#contact" class="svc-link">Learn more <span>→</span></a>
+        </div>
+        <div class="svc-card fu d2">
+          <div class="svc-icon">🌐</div>
+          <h3 class="svc-title">Web App Development</h3>
+          <p class="svc-desc">High-performance web applications built with modern frameworks. Fast, accessible, and architected to convert visitors into customers at scale.</p>
+          <a href="#contact" class="svc-link">Learn more <span>→</span></a>
+        </div>
+        <div class="svc-card fu">
+          <div class="svc-icon">🔗</div>
+          <h3 class="svc-title">Blockchain Development</h3>
+          <p class="svc-desc">Decentralized applications, smart contracts, and Web3 infrastructure built with a security-first engineering mindset and audited code.</p>
+          <a href="#contact" class="svc-link">Learn more <span>→</span></a>
+        </div>
+        <div class="svc-card fu d1">
+          <div class="svc-icon">🎨</div>
+          <h3 class="svc-title">UI/UX Design</h3>
+          <p class="svc-desc">Design systems and product interfaces that balance aesthetics with function. Every pixel serves a purpose — we design to delight and convert.</p>
+          <a href="#contact" class="svc-link">Learn more <span>→</span></a>
+        </div>
+        <div class="svc-card fu d2">
+          <div class="svc-icon">📈</div>
+          <h3 class="svc-title">Digital Marketing</h3>
+          <p class="svc-desc">Data-driven growth strategies that amplify your digital presence and convert traffic into measurable, attributable revenue for your business.</p>
+          <a href="#contact" class="svc-link">Learn more <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ WHY CHOOSE US ════════════════════ -->
+  <section id="why-us" class="why-section">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <div class="pill fu">Why Avology</div>
+          <h2 class="h2 fu d1" style="margin-bottom:14px">Built for<br>Enterprise Scale</h2>
+          <p class="sub fu d2" style="max-width:460px">We combine strategic thinking, design leadership, and deep engineering to deliver solutions that perform under real-world conditions.</p>
+
+          <div class="why-features">
+            <div class="wf-item fu d2">
+              <div class="wf-icon">🏆</div>
+              <div>
+                <div class="wf-title">12+ Years of Expertise</div>
+                <p class="wf-desc">Founded in 2012, we've navigated every technology shift and consistently delivered cutting-edge solutions across fintech, healthcare, logistics, and SaaS.</p>
+              </div>
+            </div>
+            <div class="wf-item fu d3">
+              <div class="wf-icon">🌍</div>
+              <div>
+                <div class="wf-title">Global Reach, Personal Service</div>
+                <p class="wf-desc">We operate internationally while maintaining personalized service. You'll have a dedicated project manager, not a ticket number.</p>
+              </div>
+            </div>
+            <div class="wf-item fu d4">
+              <div class="wf-icon">🔒</div>
+              <div>
+                <div class="wf-title">Security-First Engineering</div>
+                <p class="wf-desc">Every product we build is vetted for vulnerabilities and designed with enterprise compliance, GDPR, and audit readiness in mind from day one.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-quad fu d2">
+          <div class="sq-card">
+            <div class="sq-num">1.8M+</div>
+            <div class="sq-label">Active live cases</div>
+          </div>
+          <div class="sq-card">
+            <div class="sq-num">16K+</div>
+            <div class="sq-label">Projects delivered</div>
+          </div>
+          <div class="sq-card">
+            <div class="sq-num">98%</div>
+            <div class="sq-label">Client satisfaction</div>
+          </div>
+          <div class="sq-card">
+            <div class="sq-num">12+</div>
+            <div class="sq-label">Years in business</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ PROCESS ════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="process-head">
+        <div class="pill fu" style="margin-left:auto;margin-right:auto">How We Work</div>
+        <h2 class="h2 fu d1" style="margin-bottom:14px;text-align:center">Our Proven Process</h2>
+        <p class="sub fu d2" style="max-width:520px;margin:0 auto;text-align:center">A structured, transparent workflow that turns your vision into a polished product — on time, every time.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="ps-item fu">
+          <div class="ps-num">01</div>
+          <div>
+            <div class="ps-title">Discovery</div>
+            <p class="ps-desc">We map your goals, users, and constraints through focused discovery workshops and stakeholder interviews.</p>
+          </div>
+        </div>
+        <div class="ps-item fu d1">
+          <div class="ps-num">02</div>
+          <div>
+            <div class="ps-title">Strategy</div>
+            <p class="ps-desc">We craft the right solution architecture, technology stack, and phased roadmap to match your scope and budget.</p>
+          </div>
+        </div>
+        <div class="ps-item fu d2">
+          <div class="ps-num">03</div>
+          <div>
+            <div class="ps-title">Build & Test</div>
+            <p class="ps-desc">Iterative development with continuous QA ensures every milestone ships with quality you can rely on.</p>
+          </div>
+        </div>
+        <div class="ps-item fu d3">
+          <div class="ps-num">04</div>
+          <div>
+            <div class="ps-title">Launch</div>
+            <p class="ps-desc">Smooth deployment with team training, full documentation, and dedicated go-live support from our engineers.</p>
+          </div>
+        </div>
+        <div class="ps-item fu d4">
+          <div class="ps-num">05</div>
+          <div>
+            <div class="ps-title">Support & Growth</div>
+            <p class="ps-desc">Ongoing maintenance, performance monitoring, and feature development to keep your product ahead of the curve.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ CASE STUDIES ════════════════════ -->
+  <section id="work" class="work-section">
+    <div class="container">
+      <div class="work-header">
+        <div>
+          <div class="pill fu">Case Studies</div>
+          <h2 class="h2 fu d1">Work That<br>Speaks Results</h2>
+        </div>
+        <a href="#contact" class="btn btn-ghost fu d2">View All Projects →</a>
+      </div>
+
+      <div class="case-grid">
+        <div class="case-card fu">
+          <span class="case-tag">Mobile App</span>
+          <h3 class="case-title">FinTrack — Personal Finance Platform</h3>
+          <p class="case-desc">Cross-platform mobile app for personal finance management with AI-powered budgeting insights and real-time bank integration across 40+ institutions.</p>
+          <div class="case-metrics">
+            <div>
+              <div class="cm-num">340%</div>
+              <div class="cm-label">User growth (12 mo.)</div>
+            </div>
+            <div>
+              <div class="cm-num">4.9 ★</div>
+              <div class="cm-label">App Store rating</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card fu d1">
+          <span class="case-tag">Web Platform</span>
+          <h3 class="case-title">MediSync — Healthcare SaaS</h3>
+          <p class="case-desc">Enterprise healthcare platform connecting 200+ clinics with real-time patient management, scheduling, billing, and HIPAA-compliant data infrastructure.</p>
+          <div class="case-metrics">
+            <div>
+              <div class="cm-num">200+</div>
+              <div class="cm-label">Clinics onboarded</div>
+            </div>
+            <div>
+              <div class="cm-num">60%</div>
+              <div class="cm-label">Admin time saved</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card fu d2">
+          <span class="case-tag">Blockchain</span>
+          <h3 class="case-title">ChainVault — DeFi Protocol</h3>
+          <p class="case-desc">Decentralized finance protocol with $50M+ TVL, multi-chain smart contract automation, and a security architecture that has sustained zero incidents.</p>
+          <div class="case-metrics">
+            <div>
+              <div class="cm-num">$50M+</div>
+              <div class="cm-label">TVL secured</div>
+            </div>
+            <div>
+              <div class="cm-num">0</div>
+              <div class="cm-label">Security incidents</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ TESTIMONIALS ════════════════════ -->
+  <section id="testimonials">
+    <div class="container">
+      <div style="text-align:center">
+        <div class="pill fu" style="margin:0 auto 16px">Testimonials</div>
+        <h2 class="h2 fu d1" style="margin-bottom:14px">Clients Who Trust Us</h2>
+        <p class="sub fu d2" style="max-width:480px;margin:0 auto">Don't take our word for it — hear from the teams we've helped build, launch, and grow.</p>
+      </div>
+
+      <div class="testi-grid">
+        <div class="testi-card fu">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"They are extremely flexible and have deep development skills. Avology delivered our platform 2 weeks ahead of schedule with zero compromises on quality."</p>
+          <div class="t-author">
+            <div class="t-avatar">DS</div>
+            <div>
+              <div class="t-name">Darrell Steward</div>
+              <div class="t-role">UI/UX Designer · TechCorp</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card fu d1">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"Their professionalism and availability are most impressive. We've worked with many agencies, but Avology stands apart in how they communicate, iterate, and deliver."</p>
+          <div class="t-author">
+            <div class="t-avatar">AC</div>
+            <div>
+              <div class="t-name">Amelia Courtney</div>
+              <div class="t-role">Project Manager · NovaSoft</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card fu d2">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"Avology has become my go-to team for digital build and deployment. They treat your project like it's their own business — that ownership mentality is truly rare."</p>
+          <div class="t-author">
+            <div class="t-avatar">EH</div>
+            <div>
+              <div class="t-name">Esther Howard</div>
+              <div class="t-role">Software Developer · FinScale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ TECH STACK ════════════════════ -->
+  <section class="tech-section">
+    <div class="container">
+      <div style="text-align:center">
+        <div class="pill fu" style="margin:0 auto 16px">Technology Stack</div>
+        <h2 class="h2 fu d1" style="margin-bottom:14px">Best-in-Class<br>Technology</h2>
+        <p class="sub fu d2" style="max-width:480px;margin:0 auto">Modern, battle-tested technologies chosen for performance, reliability, and long-term maintainability.</p>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-item fu">     <span class="ti-icon">⚛️</span><span class="ti-name">React</span></div>
+        <div class="tech-item fu d1">  <span class="ti-icon">🟦</span><span class="ti-name">TypeScript</span></div>
+        <div class="tech-item fu d2">  <span class="ti-icon">🟩</span><span class="ti-name">Node.js</span></div>
+        <div class="tech-item fu d3">  <span class="ti-icon">🐍</span><span class="ti-name">Python</span></div>
+        <div class="tech-item fu d4">  <span class="ti-icon">☁️</span><span class="ti-name">AWS</span></div>
+        <div class="tech-item fu d5">  <span class="ti-icon">🐳</span><span class="ti-name">Docker</span></div>
+        <div class="tech-item fu">     <span class="ti-icon">📱</span><span class="ti-name">React Native</span></div>
+        <div class="tech-item fu d1">  <span class="ti-icon">🔷</span><span class="ti-name">Flutter</span></div>
+        <div class="tech-item fu d2">  <span class="ti-icon">🗄️</span><span class="ti-name">PostgreSQL</span></div>
+        <div class="tech-item fu d3">  <span class="ti-icon">🍃</span><span class="ti-name">MongoDB</span></div>
+        <div class="tech-item fu d4">  <span class="ti-icon">▲</span><span class="ti-name">Next.js</span></div>
+        <div class="tech-item fu d5">  <span class="ti-icon">⛓️</span><span class="ti-name">Solidity</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FAQ ════════════════════ -->
+  <section id="faq">
+    <div class="container">
+      <div style="text-align:center">
+        <div class="pill fu" style="margin:0 auto 16px">FAQ</div>
+        <h2 class="h2 fu d1" style="margin-bottom:14px">Common Questions</h2>
+        <p class="sub fu d2" style="max-width:440px;margin:0 auto">Everything you need to know about working with Avology Technologies.</p>
+      </div>
+
+      <div class="faq-list fu d2">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How long does a typical project take?
+            <span class="faq-ic">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-in">Project timelines vary by scope. A typical MVP takes 8–12 weeks. Full enterprise platforms range from 3–9 months. During our discovery phase we provide a detailed project plan with clear milestones so you always know exactly what's coming next.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What industries do you specialize in?
+            <span class="faq-ic">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-in">We have deep experience in fintech, healthcare, e-commerce, logistics, SaaS, and blockchain. Since 2012, our team has shipped production systems across 20+ verticals, giving us the domain knowledge to make smarter decisions for your specific industry.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Do you provide post-launch support?
+            <span class="faq-ic">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-in">Yes. We offer flexible support and maintenance packages ranging from on-demand to dedicated 24/7 SLA agreements. Every delivery includes team training and comprehensive technical documentation so your internal team can operate independently if needed.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How do you manage project communication?
+            <span class="faq-ic">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-in">Every client receives a dedicated project manager as their single point of contact. We run weekly progress calls, deliver sprint summaries, and maintain full transparency via Linear or Jira. You'll always know the exact status of your project in real time.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What is your pricing model?
+            <span class="faq-ic">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-in">We offer fixed-price contracts for well-scoped projects and time-and-materials for evolving engagements. After an initial discovery call, we provide a detailed proposal with transparent cost breakdowns and a phased payment schedule. No hidden fees — ever.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Can you work with our existing development team?
+            <span class="faq-ic">+</span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-in">Absolutely. We regularly augment existing engineering teams, providing specialized expertise in mobile, blockchain, or specific frameworks. We integrate with your tooling, follow your conventions, and act as a seamless extension of your team rather than a separate vendor.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ CTA ════════════════════ -->
+  <section id="contact" class="cta-section">
+    <div class="container">
+      <div class="cta-body">
+        <div class="pill fu" style="margin:0 auto 24px">Let's Build Together</div>
+        <h2 class="cta-title fu d1">Ready to Build<br><span class="grad">Something Great?</span></h2>
+        <p class="cta-sub fu d2">Schedule a free discovery call and receive a custom proposal tailored to your goals within 48 hours.</p>
+        <div class="cta-btns fu d3">
+          <a href="mailto:contact@avologypro.com" class="btn btn-primary btn-lg">
+            Start a Project
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="tel:+918219658223" class="btn btn-outline btn-lg">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.09a16 16 0 006 6l.36-.36a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 17v-.08z"/></svg>
+            +91 82196 58223
+          </a>
+        </div>
+
+        <div class="cta-perks fu d4">
+          <div class="cta-perk">
+            <div class="perk-check">
+              <svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="#10B981" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            Free discovery consultation
+          </div>
+          <div class="cta-perk">
+            <div class="perk-check">
+              <svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="#10B981" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            Proposal within 48 hours
+          </div>
+          <div class="cta-perk">
+            <div class="perk-check">
+              <svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="#10B981" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            No commitment required
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FOOTER ════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-mark">
+              <svg width="17" height="17" fill="none" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="logo-text">Avology™</span>
+          </a>
+          <p>Designing with imagination, driven by purpose. Building enterprise-grade digital products since 2012.</p>
+          <div class="socials">
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="LinkedIn">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="fc-title">Services</h4>
+          <ul class="fc-links">
+            <li><a href="#services">Software Development</a></li>
+            <li><a href="#services">Mobile Apps</a></li>
+            <li><a href="#services">Web Apps</a></li>
+            <li><a href="#services">Blockchain</a></li>
+            <li><a href="#services">UI/UX Design</a></li>
+            <li><a href="#services">Digital Marketing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="fc-title">Company</h4>
+          <ul class="fc-links">
+            <li><a href="#why-us">About Us</a></li>
+            <li><a href="#work">Case Studies</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="fc-title">Contact</h4>
+          <ul class="fc-links">
+            <li><a href="mailto:contact@avologypro.com">contact@avologypro.com</a></li>
+            <li><a href="tel:+918219658223">+91 82196 58223</a></li>
+            <li><a href="#">Mon – Fri, 8:00–16:30 IST</a></li>
+          </ul>
+          <p class="fc-address" style="margin-top:14px">Phase-8, Industrial Area<br>Sector 73, Mohali<br>Punjab 160071, India</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 Avology Technologies™. All rights reserved.</p>
+        <ul class="fb-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════ SCRIPT ════════════════════ -->
+  <script>
+    // ── Mobile nav ──
+    const hbg = document.getElementById('hbg');
+    const mn  = document.getElementById('mobileNav');
+    hbg.addEventListener('click', () => mn.classList.toggle('open'));
+    function closeNav() { mn.classList.remove('open'); }
+
+    // ── Fade-up on scroll ──
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fu').forEach(el => io.observe(el));
+
+    // ── FAQ accordion ──
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    }
+
+    // ── Counter animation (hero stats only) ──
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const raw = el.dataset.target;
+        if (!raw) return;
+        const target = parseFloat(raw);
+        const suffix = el.dataset.suffix || '';
+        const isDecimal = raw.includes('.');
+        const dur = 1600;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          const val = target * ease;
+          el.textContent = (isDecimal ? val.toFixed(1) : Math.floor(val)) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        counterObs.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+  </script>
+</body>
+</html>
